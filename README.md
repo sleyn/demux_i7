@@ -1,6 +1,6 @@
 # demux_i7
 
-Demultiplex fasta based on the header. This version uses i7 index from paired
+Demultiplex fasta based on barcodes in the Casava 1.8 header. This version uses i7 index from paired
 barcode.
 
 You can set edit distance between observed barcode and barcodes specified in the BARCODES file.
