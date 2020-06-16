@@ -35,8 +35,10 @@ with open(args.barcodes, 'r') as b_file:
 # distance calculation function one-to-many
 @lru_cache(maxsize=100000)
 def bc_distance(bc1):
-    bc_distance = [sum([1 for x, y in zip(bc1, bcl) if x.lower() != y.lower()]) for bcl in barcodes.keys()]
-    return min(bc_distance)
+    bc_distance = [sum([1 for x, y in zip(bc1, bcl) if x.lower() != y.lower()]) for bcl in barcodes_list]
+    min_dist = min(bc_distance)
+    m_index = bc_distance.index(min_dist)
+    return barcodes_list[m_index], min_dist
 
 
 # collect fastq files
@@ -67,7 +69,8 @@ for fq_file in fastq_files:
                 read_i7 = record.description.split(':')[9].split('+')[0]
                 # Check if barcode exists in the sample set
                 if args.distance:
-                    distance = bc_distance(read_i7)
+                    # cahage read_i7 to the closest
+                    read_i7, distance = bc_distance(read_i7)
                 else:
                     if not barcodes.get(read_i7) is None:
                         distance = 0
