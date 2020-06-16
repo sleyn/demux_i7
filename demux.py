@@ -58,7 +58,7 @@ for fq_file in fastq_files:
 
         gz_out = dict()
         for barcode in barcodes:
-            gz_out[barcode] = gzip.open(args.output + '/' + barcode + '_' + lane + '_' + pair + '.fq.gz', 'at')
+            gz_out[barcode] = gzip.open(args.output + '/' + barcodes[barcode] + '_' + lane + '_' + pair + '.fq.gz', 'at')
 
         undet_hndl = gzip.open(args.output + '/' + 'Undetermined_' + lane + '_' + pair + '.fq.gz', 'at')
 
